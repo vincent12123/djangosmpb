@@ -31,6 +31,22 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='customuser_groups',
+        related_query_name='customuser',
+        blank=True,
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+        verbose_name='groups'
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='customuser_permissions',
+        related_query_name='customuser',
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions'
+    )
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

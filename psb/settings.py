@@ -127,5 +127,9 @@ STATICFILES_DIRS = []
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Gunakan custom user model
+# Custom user model
 AUTH_USER_MODEL = 'accounts.User'
+
+# Login URL
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/siswa/dashboard/'

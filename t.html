@@ -1,0 +1,1591 @@
+<html class="scroll-smooth" lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>SPMB SMP Online 2025 - Registrasi Data Siswa</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+  <main class="flex-grow">
+    <!-- Form Registrasi -->
+    <section
+      class="mb-20 max-w-4xl mx-auto bg-white rounded-lg shadow p-8"
+      id="form"
+    >
+      <h2
+        class="text-3xl font-bold text-indigo-700 mb-8 text-center"
+      >
+        Form Registrasi Data Siswa
+      </h2>
+      <form class="space-y-10" id="registrationForm" novalidate>
+        <!-- Pilih Jalur -->
+        <fieldset class="mb-8">
+          <legend class="text-xl font-semibold text-indigo-600 mb-4">
+            Pilih Jalur Pendaftaran
+          </legend>
+          <div class="flex flex-wrap gap-6">
+            <label class="flex items-center space-x-3 cursor-pointer">
+              <input
+                class="form-radio text-indigo-600"
+                name="jalur"
+                type="radio"
+                value="domisili"
+              />
+              <span>Jalur Domisili</span>
+            </label>
+            <label class="flex items-center space-x-3 cursor-pointer">
+              <input
+                class="form-radio text-indigo-600"
+                name="jalur"
+                type="radio"
+                value="afirmasi"
+              />
+              <span>Jalur Afirmasi</span>
+            </label>
+            <label class="flex items-center space-x-3 cursor-pointer">
+              <input
+                class="form-radio text-indigo-600"
+                name="jalur"
+                type="radio"
+                value="prestasi"
+              />
+              <span>Jalur Prestasi</span>
+            </label>
+            <label class="flex items-center space-x-3 cursor-pointer">
+              <input
+                class="form-radio text-indigo-600"
+                name="jalur"
+                type="radio"
+                value="mutasi"
+              />
+              <span>Jalur Mutasi</span>
+            </label>
+          </div>
+        </fieldset>
+        <!-- Step 1: Data Identitas Peserta Didik -->
+        <section>
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step 1: Data Identitas Peserta Didik
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="nama"
+                >Nama Lengkap (sesuai ijazah SD/MI)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="nama"
+                name="nama"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="nik"
+                >NIK (Nomor Induk Kependudukan)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="nik"
+                maxlength="16"
+                name="nik"
+                pattern="\d{16}"
+                placeholder="16 digit angka"
+                type="text"
+                inputmode="numeric"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="nisn"
+                >NISN (Nomor Induk Siswa Nasional)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="nisn"
+                maxlength="10"
+                name="nisn"
+                placeholder="10 digit angka"
+                type="text"
+                inputmode="numeric"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="tempat_lahir"
+                >Tempat Lahir</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="tempat_lahir"
+                name="tempat_lahir"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="tanggal_lahir"
+                >Tanggal Lahir</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="tanggal_lahir"
+                max="2010-07-01"
+                name="tanggal_lahir"
+                type="date"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="jenis_kelamin"
+                >Jenis Kelamin</label
+              >
+              <select
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="jenis_kelamin"
+                name="jenis_kelamin"
+                required
+              >
+                <option value="" disabled selected>-- Pilih Jenis Kelamin --</option>
+                <option value="Laki-laki">Laki-laki</option>
+                <option value="Perempuan">Perempuan</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="agama"
+                >Agama</label
+              >
+              <select
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="agama"
+                name="agama"
+                required
+              >
+                <option value="" disabled selected>-- Pilih Agama --</option>
+                <option value="Islam">Islam</option>
+                <option value="Kristen">Kristen</option>
+                <option value="Katolik">Katolik</option>
+                <option value="Hindu">Hindu</option>
+                <option value="Buddha">Buddha</option>
+                <option value="Konghucu">Konghucu</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="kewarganegaraan"
+                >Kewarganegaraan</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="kewarganegaraan"
+                name="kewarganegaraan"
+                placeholder="Contoh: Indonesia"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="berkebutuhan_khusus"
+                >Berkebutuhan Khusus</label
+              >
+              <select
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="berkebutuhan_khusus"
+                name="berkebutuhan_khusus"
+                required
+              >
+                <option value="Tidak Ada" selected>Tidak Ada</option>
+                <option value="Tunanetra">Tunanetra</option>
+                <option value="Tunarungu">Tunarungu</option>
+                <option value="Tunadaksa">Tunadaksa</option>
+                <option value="Tunagrahita">Tunagrahita</option>
+                <option value="Lainnya">Lainnya</option>
+              </select>
+            </div>
+          </div>
+        </section>
+        <!-- Step 2: Data Alamat & Kontak -->
+        <section>
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step 2: Data Alamat &amp; Kontak
+          </h3>
+          <div class="space-y-6">
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="alamat_lengkap"
+                >Alamat Lengkap</label
+              >
+              <textarea
+                class="w-full border border-gray-300 rounded-md px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="alamat_lengkap"
+                name="alamat_lengkap"
+                placeholder="Jalan, RT/RW, Dusun, Kelurahan, Kecamatan, Kota, Provinsi, Kode Pos"
+                rows="3"
+                required
+              ></textarea>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="no_telepon_rumah"
+                  >Nomor Telepon Rumah</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="no_telepon_rumah"
+                  name="no_telepon_rumah"
+                  placeholder="Contoh: 021xxxxxxx"
+                  type="tel"
+                  inputmode="tel"
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="no_hp"
+                  >Nomor HP/WhatsApp</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="no_hp"
+                  name="no_hp"
+                  placeholder="Contoh: 08xxxxxxxxxx"
+                  type="tel"
+                  inputmode="tel"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="email"
+                  >Email (Opsional)</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="email"
+                  name="email"
+                  placeholder="contoh@mail.com"
+                  type="email"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Step 3: Data Keluarga -->
+        <section>
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step 3: Data Keluarga
+          </h3>
+          <div class="space-y-8">
+            <!-- Data Ayah -->
+            <div>
+              <h4 class="text-lg font-semibold text-indigo-600 mb-4">Data Ayah</h4>
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="nama_ayah"
+                    >Nama Ayah</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="nama_ayah"
+                    name="nama_ayah"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="nik_ayah"
+                    >NIK Ayah</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="nik_ayah"
+                    maxlength="16"
+                    name="nik_ayah"
+                    pattern="\d{16}"
+                    placeholder="16 digit angka"
+                    type="text"
+                    inputmode="numeric"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="pendidikan_ayah"
+                    >Pendidikan Ayah</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="pendidikan_ayah"
+                    name="pendidikan_ayah"
+                    required
+                  >
+                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
+                    <option value="Tidak Sekolah">Tidak Sekolah</option>
+                    <option value="SD">SD</option>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Sarjana">Sarjana</option>
+                    <option value="Pasca Sarjana">Pasca Sarjana</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="pekerjaan_ayah"
+                    >Pekerjaan Ayah</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="pekerjaan_ayah"
+                    name="pekerjaan_ayah"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="penghasilan_ayah"
+                    >Penghasilan Ayah</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="penghasilan_ayah"
+                    name="penghasilan_ayah"
+                    placeholder="Contoh: Rp 3.000.000"
+                    type="text"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Data Ibu -->
+            <div>
+              <h4 class="text-lg font-semibold text-indigo-600 mb-4">Data Ibu</h4>
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="nama_ibu"
+                    >Nama Ibu</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="nama_ibu"
+                    name="nama_ibu"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="nik_ibu"
+                    >NIK Ibu</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="nik_ibu"
+                    maxlength="16"
+                    name="nik_ibu"
+                    pattern="\d{16}"
+                    placeholder="16 digit angka"
+                    type="text"
+                    inputmode="numeric"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="pendidikan_ibu"
+                    >Pendidikan Ibu</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="pendidikan_ibu"
+                    name="pendidikan_ibu"
+                    required
+                  >
+                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
+                    <option value="Tidak Sekolah">Tidak Sekolah</option>
+                    <option value="SD">SD</option>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Sarjana">Sarjana</option>
+                    <option value="Pasca Sarjana">Pasca Sarjana</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="pekerjaan_ibu"
+                    >Pekerjaan Ibu</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="pekerjaan_ibu"
+                    name="pekerjaan_ibu"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="penghasilan_ibu"
+                    >Penghasilan Ibu</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="penghasilan_ibu"
+                    name="penghasilan_ibu"
+                    placeholder="Contoh: Rp 3.000.000"
+                    type="text"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Data Wali -->
+            <div>
+              <h4 class="text-lg font-semibold text-indigo-600 mb-4">
+                Data Wali (Jika Diasuh Wali)
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="nama_wali"
+                    >Nama Wali</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="nama_wali"
+                    name="nama_wali"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="nik_wali"
+                    >NIK Wali</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="nik_wali"
+                    maxlength="16"
+                    name="nik_wali"
+                    pattern="\d{16}"
+                    placeholder="16 digit angka"
+                    type="text"
+                    inputmode="numeric"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="pendidikan_wali"
+                    >Pendidikan Wali</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="pendidikan_wali"
+                    name="pendidikan_wali"
+                  >
+                    <option value="" disabled selected>-- Pilih Pendidikan --</option>
+                    <option value="Tidak Sekolah">Tidak Sekolah</option>
+                    <option value="SD">SD</option>
+                    <option value="SMP">SMP</option>
+                    <option value="SMA">SMA</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Sarjana">Sarjana</option>
+                    <option value="Pasca Sarjana">Pasca Sarjana</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="pekerjaan_wali"
+                    >Pekerjaan Wali</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="pekerjaan_wali"
+                    name="pekerjaan_wali"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="penghasilan_wali"
+                    >Penghasilan Wali</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="penghasilan_wali"
+                    name="penghasilan_wali"
+                    placeholder="Contoh: Rp 3.000.000"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Step 4: Data Sekolah Asal -->
+        <section>
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step 4: Data Sekolah Asal
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="nama_sekolah"
+                >Nama Sekolah SD/MI</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="nama_sekolah"
+                name="nama_sekolah"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="npsn"
+                >NPSN Sekolah</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="npsn"
+                maxlength="8"
+                name="npsn"
+                placeholder="8 digit angka"
+                type="text"
+                inputmode="numeric"
+                required
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="alamat_sekolah"
+                >Alamat Sekolah</label
+              >
+              <textarea
+                class="w-full border border-gray-300 rounded-md px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="alamat_sekolah"
+                name="alamat_sekolah"
+                rows="2"
+                required
+              ></textarea>
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="tahun_lulus"
+                >Tahun Lulus</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="tahun_lulus"
+                max="2025"
+                min="2015"
+                name="tahun_lulus"
+                placeholder="Contoh: 2024"
+                type="number"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="rata_nilai_rapor"
+                >Rata-rata Nilai Rapor</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="rata_nilai_rapor"
+                max="100"
+                min="0"
+                name="rata_nilai_rapor"
+                placeholder="Contoh: 85.50"
+                step="0.01"
+                type="number"
+                required
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Step Tambahan Jalur Domisili -->
+        <section class="hidden" id="step-domisili">
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step Tambahan Jalur Domisili
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="jarak_rumah_sekolah"
+                >Jarak Rumah ke Sekolah (km)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="jarak_rumah_sekolah"
+                min="0"
+                name="jarak_rumah_sekolah"
+                step="0.01"
+                type="number"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="waktu_tempuh"
+                >Waktu Tempuh (menit)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="waktu_tempuh"
+                min="0"
+                name="waktu_tempuh"
+                type="number"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="moda_transportasi"
+                >Moda Transportasi</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="moda_transportasi"
+                name="moda_transportasi"
+                placeholder="Contoh: Jalan kaki, sepeda, angkutan umum"
+                type="text"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="lama_tinggal_kk"
+                >Lama Tinggal di Alamat KK (tahun)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="lama_tinggal_kk"
+                min="0"
+                name="lama_tinggal_kk"
+                type="number"
+                required
+              />
+            </div>
+            <div class="md:col-span-2">
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                >Upload Dokumen (KK, KTP Orang Tua, Surat Keterangan Domisili)</label
+              >
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full"
+                id="upload_domisili_kk"
+                name="upload_domisili_kk"
+                type="file"
+                required
+              />
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full mt-2"
+                id="upload_domisili_ktp"
+                name="upload_domisili_ktp"
+                type="file"
+                required
+              />
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full mt-2"
+                id="upload_domisili_surat"
+                name="upload_domisili_surat"
+                type="file"
+                required
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Step Tambahan Jalur Afirmasi -->
+        <section class="hidden" id="step-afirmasi">
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step Tambahan Jalur Afirmasi
+          </h3>
+          <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="kip_status"
+                  >Kepemilikan KIP</label
+                >
+                <select
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="kip_status"
+                  name="kip_status"
+                  required
+                >
+                  <option value="Tidak" selected>Tidak</option>
+                  <option value="Ya">Ya</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="kip_nomor"
+                  >Nomor KIP</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="kip_nomor"
+                  name="kip_nomor"
+                  type="text"
+                  required
+                />
+              </div>
+              <div></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="pkh_status"
+                  >Kepemilikan PKH</label
+                >
+                <select
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="pkh_status"
+                  name="pkh_status"
+                  required
+                >
+                  <option value="Tidak" selected>Tidak</option>
+                  <option value="Ya">Ya</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="pkh_nomor"
+                  >Nomor PKH</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="pkh_nomor"
+                  name="pkh_nomor"
+                  type="text"
+                  required
+                />
+              </div>
+              <div></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="kps_status"
+                  >Kepemilikan KPS/KKS</label
+                >
+                <select
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="kps_status"
+                  name="kps_status"
+                  required
+                >
+                  <option value="Tidak" selected>Tidak</option>
+                  <option value="Ya">Ya</option>
+                </select>
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="kps_nomor"
+                  >Nomor KPS/KKS</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="kps_nomor"
+                  name="kps_nomor"
+                  type="text"
+                  required
+                />
+              </div>
+              <div></div>
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="status_disabilitas"
+                >Status Disabilitas (jika ada)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="status_disabilitas"
+                name="status_disabilitas"
+                placeholder="Contoh: Tunanetra"
+                type="text"
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                >Upload Dokumen (KIP/PKH/KPS/KKS, Surat Keterangan Tidak Mampu, Surat Keterangan Disabilitas)</label
+              >
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full"
+                id="upload_afirmasi_kippkh"
+                name="upload_afirmasi_kippkh"
+                type="file"
+                required
+              />
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full mt-2"
+                id="upload_afirmasi_tidakmampu"
+                name="upload_afirmasi_tidakmampu"
+                type="file"
+                required
+              />
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full mt-2"
+                id="upload_afirmasi_disabilitas"
+                name="upload_afirmasi_disabilitas"
+                type="file"
+                required
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Step Tambahan Jalur Prestasi -->
+        <section class="hidden" id="step-prestasi">
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step Tambahan Jalur Prestasi
+          </h3>
+          <div class="space-y-8">
+            <!-- Prestasi Akademik -->
+            <div>
+              <h4 class="text-lg font-semibold text-indigo-600 mb-4">
+                Prestasi Akademik
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="jenis_prestasi_akademik"
+                    >Jenis Prestasi</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="jenis_prestasi_akademik"
+                    name="jenis_prestasi_akademik"
+                    required
+                  >
+                    <option value="" disabled selected>-- Pilih Jenis Prestasi --</option>
+                    <option value="Olimpiade Matematika">Olimpiade Matematika</option>
+                    <option value="Olimpiade IPA">Olimpiade IPA</option>
+                    <option value="Olimpiade IPS">Olimpiade IPS</option>
+                    <option value="Olimpiade Bahasa">Olimpiade Bahasa</option>
+                    <option value="Lainnya">Lainnya</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="tingkat_prestasi_akademik"
+                    >Tingkat</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="tingkat_prestasi_akademik"
+                    name="tingkat_prestasi_akademik"
+                    required
+                  >
+                    <option value="" disabled selected>-- Pilih Tingkat --</option>
+                    <option value="Sekolah">Sekolah</option>
+                    <option value="Kota">Kota</option>
+                    <option value="Provinsi">Provinsi</option>
+                    <option value="Nasional">Nasional</option>
+                    <option value="Internasional">Internasional</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="peringkat_prestasi_akademik"
+                    >Peringkat/Juara</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="peringkat_prestasi_akademik"
+                    name="peringkat_prestasi_akademik"
+                    placeholder="Contoh: Juara 1"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="tahun_prestasi_akademik"
+                    >Tahun Perolehan</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="tahun_prestasi_akademik"
+                    max="2025"
+                    min="2022"
+                    name="tahun_prestasi_akademik"
+                    placeholder="Contoh: 2024"
+                    type="number"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="penyelenggara_prestasi_akademik"
+                    >Penyelenggara</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="penyelenggara_prestasi_akademik"
+                    name="penyelenggara_prestasi_akademik"
+                    placeholder="Contoh: Dinas Pendidikan Kota"
+                    type="text"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- Prestasi Non-Akademik -->
+            <div>
+              <h4 class="text-lg font-semibold text-indigo-600 mb-4">
+                Prestasi Non-Akademik
+              </h4>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="bidang_prestasi_nonakademik"
+                    >Bidang</label
+                  >
+                  <select
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="bidang_prestasi_nonakademik"
+                    name="bidang_prestasi_nonakademik"
+                    required
+                  >
+                    <option value="" disabled selected>-- Pilih Bidang --</option>
+                    <option value="Olahraga">Olahraga</option>
+                    <option value="Seni">Seni</option>
+                    <option value="Keagamaan">Keagamaan</option>
+                    <option value="Lainnya">Lainnya</option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="cabang_prestasi_nonakademik"
+                    >Cabang Spesifik</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="cabang_prestasi_nonakademik"
+                    name="cabang_prestasi_nonakademik"
+                    placeholder="Contoh: Sepak Bola"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="tingkat_peringkat_nonakademik"
+                    >Tingkat dan Peringkat</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="tingkat_peringkat_nonakademik"
+                    name="tingkat_peringkat_nonakademik"
+                    placeholder="Contoh: Kota, Juara 2"
+                    type="text"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="tahun_prestasi_nonakademik"
+                    >Tahun Perolehan</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="tahun_prestasi_nonakademik"
+                    max="2025"
+                    min="2022"
+                    name="tahun_prestasi_nonakademik"
+                    placeholder="Contoh: 2023"
+                    type="number"
+                    required
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block text-gray-700 font-semibold mb-1"
+                    for="penyelenggara_prestasi_nonakademik"
+                    >Penyelenggara</label
+                  >
+                  <input
+                    class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    id="penyelenggara_prestasi_nonakademik"
+                    name="penyelenggara_prestasi_nonakademik"
+                    placeholder="Contoh: KONI Kota"
+                    type="text"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                >Upload Dokumen (Sertifikat Prestasi, Surat Rekomendasi Sekolah)</label
+              >
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full"
+                id="upload_prestasi_sertifikat"
+                name="upload_prestasi_sertifikat"
+                type="file"
+                required
+              />
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full mt-2"
+                id="upload_prestasi_rekomendasi"
+                name="upload_prestasi_rekomendasi"
+                type="file"
+                required
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Step Tambahan Jalur Mutasi -->
+        <section class="hidden" id="step-mutasi">
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step Tambahan Jalur Mutasi
+          </h3>
+          <div class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="data_kepegawaian_ortu"
+                  >Data Kepegawaian Orang Tua</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="data_kepegawaian_ortu"
+                  name="data_kepegawaian_ortu"
+                  placeholder="Contoh: PNS, Guru"
+                  type="text"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="instansi_asal"
+                  >Instansi Asal</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="instansi_asal"
+                  name="instansi_asal"
+                  type="text"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="instansi_tujuan"
+                  >Instansi Tujuan</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="instansi_tujuan"
+                  name="instansi_tujuan"
+                  type="text"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="nomor_surat_tugas"
+                  >Nomor Surat Tugas</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="nomor_surat_tugas"
+                  name="nomor_surat_tugas"
+                  type="text"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="tanggal_surat_tugas"
+                  >Tanggal Surat Tugas</label
+                >
+                <input
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="tanggal_surat_tugas"
+                  name="tanggal_surat_tugas"
+                  type="date"
+                  required
+                />
+              </div>
+              <div>
+                <label
+                  class="block text-gray-700 font-semibold mb-1"
+                  for="alasan_mutasi"
+                  >Alasan Mutasi</label
+                >
+                <textarea
+                  class="w-full border border-gray-300 rounded-md px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  id="alasan_mutasi"
+                  name="alasan_mutasi"
+                  rows="2"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                >Upload Dokumen (Surat Tugas/Mutasi, SK Pengangkatan, Surat Keterangan dari Instansi)</label
+              >
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full"
+                id="upload_mutasi_surat_tugas"
+                name="upload_mutasi_surat_tugas"
+                type="file"
+                required
+              />
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full mt-2"
+                id="upload_mutasi_sk_pengangkatan"
+                name="upload_mutasi_sk_pengangkatan"
+                type="file"
+                required
+              />
+              <input
+                accept=".pdf,.jpg,.jpeg,.png"
+                class="w-full mt-2"
+                id="upload_mutasi_surat_keterangan"
+                name="upload_mutasi_surat_keterangan"
+                type="file"
+                required
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Step 5: Data Kesehatan & Periodik -->
+        <section>
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step 5: Data Kesehatan &amp; Periodik
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="tinggi_badan"
+                >Tinggi Badan (cm)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="tinggi_badan"
+                min="0"
+                name="tinggi_badan"
+                type="number"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="berat_badan"
+                >Berat Badan (kg)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="berat_badan"
+                min="0"
+                name="berat_badan"
+                type="number"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="lingkar_kepala"
+                >Lingkar Kepala (cm)</label
+              >
+              <input
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="lingkar_kepala"
+                min="0"
+                name="lingkar_kepala"
+                type="number"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="golongan_darah"
+                >Golongan Darah</label
+              >
+              <select
+                class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="golongan_darah"
+                name="golongan_darah"
+                required
+              >
+                <option value="" disabled selected>-- Pilih Golongan Darah --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="AB">AB</option>
+                <option value="O">O</option>
+                <option value="Tidak Tahu">Tidak Tahu</option>
+              </select>
+            </div>
+            <div class="md:col-span-2">
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="riwayat_penyakit"
+                >Riwayat Penyakit</label
+              >
+              <textarea
+                class="w-full border border-gray-300 rounded-md px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="riwayat_penyakit"
+                name="riwayat_penyakit"
+                placeholder="Contoh: Asma, alergi"
+                rows="2"
+              ></textarea>
+            </div>
+            <div class="md:col-span-2">
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="kelainan_jasmani"
+                >Kelainan Jasmani</label
+              >
+              <textarea
+                class="w-full border border-gray-300 rounded-md px-3 py-2 resize-y focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                id="kelainan_jasmani"
+                name="kelainan_jasmani"
+                placeholder="Contoh: Tidak ada"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+        </section>
+        <!-- Step 6: Pilihan Sekolah -->
+        <section>
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step 6: Upload Dokumen
+          </h3>
+          <div class="space-y-6">
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="upload_ijazah"
+                >Ijazah/SKL SD/MI (PDF, max 2MB)</label
+              >
+              <input
+                accept=".pdf"
+                class="w-full"
+                id="upload_ijazah"
+                name="upload_ijazah"
+                type="file"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="upload_akta"
+                >Akta Kelahiran (PDF, max 2MB)</label
+              >
+              <input
+                accept=".pdf"
+                class="w-full"
+                id="upload_akta"
+                name="upload_akta"
+                type="file"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="upload_kk"
+                >Kartu Keluarga (PDF, max 2MB)</label
+              >
+              <input
+                accept=".pdf"
+                class="w-full"
+                id="upload_kk"
+                name="upload_kk"
+                type="file"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="upload_ktp_ortu"
+                >KTP Orang Tua (PDF, max 2MB)</label
+              >
+              <input
+                accept=".pdf"
+                class="w-full"
+                id="upload_ktp_ortu"
+                name="upload_ktp_ortu"
+                type="file"
+                required
+              />
+            </div>
+            <div>
+              <label
+                class="block text-gray-700 font-semibold mb-1"
+                for="upload_pas_foto"
+                >Pas Foto 3x4 (JPG, max 1MB)</label
+              >
+              <input
+                accept=".jpg,.jpeg"
+                class="w-full"
+                id="upload_pas_foto"
+                name="upload_pas_foto"
+                type="file"
+                required
+              />
+            </div>
+          </div>
+        </section>
+        <!-- Step 8: Verifikasi & Konfirmasi -->
+        <section>
+          <h3
+            class="text-2xl font-semibold text-indigo-700 mb-6 border-b border-indigo-300 pb-2"
+          >
+            Step 8: Verifikasi &amp; Konfirmasi
+          </h3>
+          <div class="space-y-6">
+            <div
+              class="bg-indigo-50 border border-indigo-200 rounded-md p-4 text-gray-700"
+            >
+              <p>
+                Silakan review semua data yang telah Anda isi sebelum mengirimkan
+                formulir.
+              </p>
+            </div>
+            <div class="flex items-center space-x-3">
+              <input
+                class="form-checkbox text-indigo-600"
+                id="pernyataan_kebenaran"
+                name="pernyataan_kebenaran"
+                type="checkbox"
+                required
+              />
+              <label
+                class="text-gray-700 font-semibold"
+                for="pernyataan_kebenaran"
+              >
+                Saya menyatakan bahwa data yang saya isi adalah benar dan dapat
+                dipertanggungjawabkan.
+              </label>
+            </div>
+
+            <button
+              class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-md transition"
+              type="submit"
+            >
+              Kirim Registrasi
+            </button>
+          </div>
+        </section>
+      </form>
+    </section>
+    <!-- Help Desk -->
+    <section
+      class="max-w-4xl mx-auto bg-white rounded-lg shadow p-8 mb-20"
+      id="helpdesk"
+    >
+      <h2 class="text-3xl font-bold text-indigo-700 mb-6 text-center">
+        Help Desk - Bantuan Teknis
+      </h2>
+      <p class="text-gray-700 mb-6 text-center">
+        Jika Anda mengalami kesulitan dalam proses pendaftaran, silakan hubungi
+        kami melalui chat support berikut:
+      </p>
+      <div class="flex justify-center space-x-6 flex-wrap">
+        <a
+          class="inline-flex items-center space-x-2 bg-green-500 hover:bg-green-600 text-white font-semibold px-6 py-3 rounded-md transition"
+          href="https://wa.me/6281234567890"
+          rel="noopener"
+          target="_blank"
+          ><i class="fab fa-whatsapp fa-lg"></i><span>WhatsApp Chat</span></a
+        >
+        <a
+          class="inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-md transition"
+          href="mailto:support@spmbsmp2025.id"
+          ><i class="fas fa-envelope fa-lg"></i><span>Email Support</span></a
+        >
+      </div>
+    </section>
+  </main>
+  <footer class="bg-white border-t border-gray-200 py-6">
+    <div
+      class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-gray-600 text-sm"
+    >
+      © 2024 SPMB SMP Online. All rights reserved.
+    </div>
+  </footer>
+  <script>
+    // Mobile menu toggle
+    const mobileMenuButton = document.getElementById("mobile-menu-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (mobileMenuButton && mobileMenu) {
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+    }
+
+    // Show/hide jalur specific steps
+    const jalurRadios = document.querySelectorAll('input[name="jalur"]');
+    const stepDomisili = document.getElementById("step-domisili");
+    const stepAfirmasi = document.getElementById("step-afirmasi");
+    const stepPrestasi = document.getElementById("step-prestasi");
+    const stepMutasi = document.getElementById("step-mutasi");
+
+    function hideAllJalurSteps() {
+      stepDomisili.classList.add("hidden");
+      stepAfirmasi.classList.add("hidden");
+      stepPrestasi.classList.add("hidden");
+      stepMutasi.classList.add("hidden");
+    }
+
+    jalurRadios.forEach((radio) => {
+      radio.addEventListener("change", () => {
+        hideAllJalurSteps();
+        if (radio.checked) {
+          if (radio.value === "domisili") stepDomisili.classList.remove("hidden");
+          else if (radio.value === "afirmasi") stepAfirmasi.classList.remove("hidden");
+          else if (radio.value === "prestasi") stepPrestasi.classList.remove("hidden");
+          else if (radio.value === "mutasi") stepMutasi.classList.remove("hidden");
+        }
+      });
+    });
+
+    // Form submission handler
+    const form = document.getElementById("registrationForm");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      alert("Form registrasi telah dikirim. Terima kasih!");
+      form.reset();
+      hideAllJalurSteps();
+    });
+  </script>
+</body>
+</html>

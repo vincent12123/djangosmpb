@@ -6,74 +6,634 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Siswa - PPDB SMP Negeri 2</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-      body { font-family: 'Inter', sans-serif; }
+        * { font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg, #e0e7ef 0%, #f5f7fa 100%);
+            min-height: 100vh;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #e0e7ef 0%, #f5f7fa 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid #e3e8ee;
+            box-shadow: 0 4px 24px rgba(100, 116, 139, 0.08);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 12px 32px rgba(100, 116, 139, 0.10);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .slide-in-up {
+            animation: slideInUp 0.8s ease-out;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(5px) rotate(-1deg); }
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #a5b4fc 0%, #60a5fa 100%);
+            height: 8px;
+            border-radius: 10px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .notification-dot {
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            border-radius: 50%;
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            animation: blink 1.5s infinite;
+            box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; transform: scale(1); }
+            51%, 100% { opacity: 0.5; transform: scale(0.9); }
+        }
+        
+        .sidebar-menu {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar-menu:hover {
+            background: rgba(59, 130, 246, 0.08);
+            transform: translateX(6px);
+            box-shadow: 0 2px 8px rgba(100, 116, 139, 0.08);
+        }
+        
+        .sidebar-menu::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar-menu:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .weather-widget {
+            background: linear-gradient(135deg, #c7d2fe 0%, #e0e7ef 100%);
+            border-radius: 20px;
+            padding: 20px;
+            color: #334155;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .weather-widget::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
+            animation: weatherEffect 8s linear infinite;
+        }
+        
+        @keyframes weatherEffect {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .achievement-badge {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e0e7ef 100%);
+            border-radius: 15px;
+            padding: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .achievement-badge::after {
+            content: '✨';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .stat-number {
+            background: linear-gradient(135deg, #2563eb 0%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 20px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.2);
+            animation: timelinePulse 2s infinite;
+        }
+        
+        @keyframes timelinePulse {
+            0%, 100% { box-shadow: 0 0 0 4px rgba(79, 172, 254, 0.2); }
+            50% { box-shadow: 0 0 0 8px rgba(79, 172, 254, 0.1); }
+        }
+        
+        .custom-scroll::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 10px;
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
+        }
+        
+        .nav-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar-menu:hover .nav-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+        
+        .glass-effect .text-white,
+        .glass-effect .text-white\/70,
+        .glass-effect .text-white\/80,
+        .glass-effect .text-white\/90 {
+            color: #334155 !important;
+        }
+        .glass-effect .text-blue-400 {
+            color: #2563eb !important;
+        }
+        .glass-effect .text-green-400 {
+            color: #059669 !important;
+        }
+        .glass-effect .text-purple-400 {
+            color: #7c3aed !important;
+        }
+        .glass-effect .text-orange-400 {
+            color: #f59e42 !important;
+        }
+        .glass-effect .text-yellow-400 {
+            color: #eab308 !important;
+        }
+        .glass-effect .bg-gradient-to-r {
+            background: linear-gradient(135deg, #c7d2fe 0%, #a5b4fc 100%) !important;
+        }
+        .glass-effect .bg-gradient-to-r.from-blue-400.to-blue-600 {
+            background: linear-gradient(135deg, #a5b4fc 0%, #60a5fa 100%) !important;
+        }
+        .glass-effect .bg-gradient-to-r.from-green-400.to-green-600 {
+            background: linear-gradient(135deg, #bbf7d0 0%, #34d399 100%) !important;
+        }
+        .glass-effect .bg-gradient-to-r.from-purple-400.to-purple-600 {
+            background: linear-gradient(135deg, #ddd6fe 0%, #a78bfa 100%) !important;
+        }
+        .glass-effect .bg-gradient-to-r.from-orange-400.to-orange-600 {
+            background: linear-gradient(135deg, #fed7aa 0%, #fdba74 100%) !important;
+        }
+        .glass-effect .bg-gradient-to-r.from-blue-400.to-purple-500 {
+            background: linear-gradient(135deg, #a5b4fc 0%, #c4b5fd 100%) !important;
+        }
+        .glass-effect .bg-gradient-to-r.from-red-500.to-red-600 {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%) !important;
+        }
+        .glass-effect .bg-gradient-to-r.from-red-600.to-red-700 {
+            background: linear-gradient(135deg, #fca5a5 0%, #ef4444 100%) !important;
+        }
+        .glass-effect .bg-white\/10 {
+            background: rgba(226, 232, 240, 0.3) !important;
+        }
+        .glass-effect .bg-white\/60 {
+            background: rgba(226, 232, 240, 0.6) !important;
+        }
+        .glass-effect .bg-white\/70 {
+            background: rgba(226, 232, 240, 0.7) !important;
+        }
+        .glass-effect .bg-white\/80 {
+            background: rgba(226, 232, 240, 0.8) !important;
+        }
+        .glass-effect .bg-white\/100 {
+            background: #fff !important;
+        }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="bg-gray-100 min-h-screen">
     <!-- Topbar -->
-    <header class="bg-white shadow flex items-center justify-between px-6 py-4 sticky top-0 z-10">
-        <div class="flex items-center gap-3">
-            <span class="text-2xl font-bold text-green-700"><i class="fas fa-user-graduate mr-2"></i>Dashboard Siswa</span>
-        </div>
+    <header class="glass-effect backdrop-blur-lg border-b border-white/20 flex items-center justify-between px-8 py-4 sticky top-0 z-50">
         <div class="flex items-center gap-4">
-            <span class="text-gray-700 font-semibold"><i class="fas fa-user-circle mr-1"></i>{{ request.user.username }}</span>
-            <a href="/accounts/logout/" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition flex items-center"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+            <div class="floating">
+                <i class="fas fa-graduation-cap text-3xl text-white"></i>
+            </div>
+            <div>
+                <h1 class="text-2xl font-bold text-white">Dashboard Siswa</h1>
+                <p class="text-white/70 text-sm">PPDB SMP Negeri 2 Sintang</p>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <div class="relative">
+                <i class="fas fa-bell text-white text-xl cursor-pointer hover:text-blue-200 transition"></i>
+                <div class="notification-dot"></div>
+            </div>
+            <div class="flex items-center gap-3 glass-effect px-4 py-2 rounded-full">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center">
+                    <i class="fas fa-user text-white text-sm"></i>
+                </div>
+                <span class="text-white font-semibold">{{ request.user.username }}</span>
+            </div>
+            <a href="/accounts/logout/" class="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 py-2 rounded-full transition flex items-center gap-2 shadow-lg">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Logout</span>
+            </a>
         </div>
     </header>
-    <div class="flex flex-1 min-h-0">
+
+    <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 bg-gradient-to-b from-blue-800 to-blue-700 text-white flex flex-col py-8 px-4 min-h-screen">
-            <div class="mb-8 flex flex-col items-center">
-                <i class="fas fa-user-circle text-5xl mb-2"></i>
-                <span class="font-bold text-lg">{{ request.user.username }}</span>
-                <span class="text-xs text-blue-200">Calon Siswa</span>
+        <aside class="w-72 glass-effect backdrop-blur-lg border-r border-white/20 text-white flex flex-col py-8 px-6 custom-scroll">
+            <div class="mb-10 text-center slide-in-up">
+                <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center glow-effect">
+                    <i class="fas fa-user-graduate text-3xl text-white"></i>
+                </div>
+                <h2 class="font-bold text-xl mb-1">{{ request.user.username }}</h2>
+                <span class="text-white/70 text-sm bg-white/10 px-3 py-1 rounded-full">Calon Siswa</span>
+                <div class="mt-4 achievement-badge">
+                    <p class="text-gray-700 text-sm font-semibold">Status: Aktif</p>
+                </div>
             </div>
-            <nav class="flex flex-col gap-2">
-                <a href="/siswa/status/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-info-circle"></i>Status</a>
-                <a href="/siswa/formulir/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-edit"></i>Isi Formulir</a>
-                <a href="/siswa/upload/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-upload"></i>Upload Dokumen</a>
-                <a href="/siswa/pengumuman/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-bullhorn"></i>Pengumuman</a>
+            
+            <nav class="flex flex-col gap-3">
+                <a href="#" class="sidebar-menu flex items-center gap-4 px-4 py-3 rounded-xl">
+                    <i class="fas fa-home nav-icon text-xl w-6"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+                <a href="/siswa/status/" class="sidebar-menu flex items-center gap-4 px-4 py-3 rounded-xl">
+                    <i class="fas fa-info-circle nav-icon text-xl w-6"></i>
+                    <span class="font-medium">Status Pendaftaran</span>
+                </a>
+                <a href="/siswa/formulir/" class="sidebar-menu flex items-center gap-4 px-4 py-3 rounded-xl">
+                    <i class="fas fa-edit nav-icon text-xl w-6"></i>
+                    <span class="font-medium">Isi Formulir</span>
+                </a>
+                <a href="/siswa/upload/" class="sidebar-menu flex items-center gap-4 px-4 py-3 rounded-xl">
+                    <i class="fas fa-upload nav-icon text-xl w-6"></i>
+                    <span class="font-medium">Upload Dokumen</span>
+                </a>
+                <a href="/siswa/pengumuman/" class="sidebar-menu flex items-center gap-4 px-4 py-3 rounded-xl">
+                    <i class="fas fa-bullhorn nav-icon text-xl w-6"></i>
+                    <span class="font-medium">Pengumuman</span>
+                    <div class="notification-dot"></div>
+                </a>
             </nav>
+
+            <!-- Weather Widget -->
+            <div class="weather-widget mt-8 slide-in-up" style="animation-delay: 0.2s;">
+                <div class="flex items-center justify-between relative z-10">
+                    <div>
+                        <p class="text-white/90 text-sm">Sintang</p>
+                        <p class="text-2xl font-bold">28°C</p>
+                        <p class="text-white/70 text-xs">Cerah</p>
+                    </div>
+                    <i class="fas fa-sun text-3xl text-yellow-300 floating"></i>
+                </div>
+            </div>
         </aside>
+
         <!-- Main Content -->
-        <main class="flex-1 p-8 overflow-y-auto">
-            <h1 class="text-3xl font-bold mb-6 text-green-700 flex items-center gap-2"><i class="fas fa-home"></i> Selamat Datang, {{ request.user.username }}!</h1>
+        <main class="flex-1 p-8 overflow-y-auto custom-scroll">
+            {% block content %}
+            <div class="slide-in-up">
+                <h1 class="text-4xl font-bold mb-2 gradient-text flex items-center gap-3">
+                    <i class="fas fa-home text-3xl"></i> 
+                    Selamat Datang, {{ request.user.username }}!
+                </h1>
+                <p class="text-white/80 text-lg mb-8">Mari lengkapi proses pendaftaran Anda</p>
+            </div>
+
             <!-- Card Statistik -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4">
-                    <div class="bg-blue-100 text-blue-700 rounded-full p-3"><i class="fas fa-file-alt fa-2x"></i></div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="glass-effect rounded-2xl p-6 card-hover slide-in-up" style="animation-delay: 0.1s;">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-file-alt text-white text-xl"></i>
+                        </div>
+                        <span class="text-blue-400 text-sm font-semibold">70%</span>
+                    </div>
                     <div>
-                        <div class="text-2xl font-bold">-</div>
-                        <div class="text-sm text-gray-500">Dokumen Diupload</div>
+                        <div class="stat-number text-3xl font-bold mb-1">3/5</div>
+                        <div class="text-white/70 text-sm mb-3">Dokumen Diupload</div>
+                        <div class="progress-bar" style="width: 60%;"></div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4">
-                    <div class="bg-green-100 text-green-700 rounded-full p-3"><i class="fas fa-check-circle fa-2x"></i></div>
+
+                <div class="glass-effect rounded-2xl p-6 card-hover slide-in-up" style="animation-delay: 0.2s;">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-r from-green-400 to-green-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-check-circle text-white text-xl"></i>
+                        </div>
+                        <span class="text-green-400 text-sm font-semibold">Aktif</span>
+                    </div>
                     <div>
-                        <div class="text-2xl font-bold">-</div>
-                        <div class="text-sm text-gray-500">Status Pendaftaran</div>
+                        <div class="stat-number text-3xl font-bold mb-1">Proses</div>
+                        <div class="text-white/70 text-sm mb-3">Status Verifikasi</div>
+                        <div class="progress-bar" style="width: 45%;"></div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4">
-                    <div class="bg-yellow-100 text-yellow-700 rounded-full p-3"><i class="fas fa-bullhorn fa-2x"></i></div>
+
+                <div class="glass-effect rounded-2xl p-6 card-hover slide-in-up" style="animation-delay: 0.3s;">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-calendar-alt text-white text-xl"></i>
+                        </div>
+                        <span class="text-purple-400 text-sm font-semibold">15 Hari</span>
+                    </div>
                     <div>
-                        <div class="text-2xl font-bold">-</div>
-                        <div class="text-sm text-gray-500">Pengumuman</div>
+                        <div class="stat-number text-3xl font-bold mb-1">Jan 30</div>
+                        <div class="text-white/70 text-sm mb-3">Batas Pendaftaran</div>
+                        <div class="progress-bar" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <div class="glass-effect rounded-2xl p-6 card-hover slide-in-up" style="animation-delay: 0.4s;">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-14 h-14 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-trophy text-white text-xl"></i>
+                        </div>
+                        <span class="text-orange-400 text-sm font-semibold">Baru</span>
+                    </div>
+                    <div>
+                        <div class="stat-number text-3xl font-bold mb-1">245</div>
+                        <div class="text-white/70 text-sm mb-3">Ranking Sementara</div>
+                        <div class="progress-bar" style="width: 75%;"></div>
                     </div>
                 </div>
             </div>
-            <div class="bg-white rounded-xl shadow p-6">
-                <h2 class="text-xl font-semibold mb-2 text-blue-700">Panduan Singkat</h2>
-                <ul class="list-disc pl-6 text-gray-700 space-y-1">
-                    <li>Lengkapi data diri dan formulir pendaftaran sesuai Dapodik.</li>
-                    <li>Upload dokumen yang diperlukan (KK, Akta, dsb).</li>
-                    <li>Cek status pendaftaran secara berkala.</li>
-                    <li>Lihat pengumuman hasil seleksi di menu pengumuman.</li>
-                </ul>
+
+            <!-- Content Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Panduan & Timeline -->
+                <div class="lg:col-span-2 space-y-8">
+                    <div class="glass-effect rounded-2xl p-8 slide-in-up" style="animation-delay: 0.5s;">
+                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <i class="fas fa-list-check text-blue-400"></i>
+                            Panduan Pendaftaran
+                        </h2>
+                        <div class="space-y-6">
+                            <div class="timeline-item">
+                                <h3 class="font-semibold text-white mb-2">Lengkapi Data Diri</h3>
+                                <p class="text-white/70 text-sm">Isi formulir pendaftaran sesuai dengan data Dapodik SMP Indonesia</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3 class="font-semibold text-white mb-2">Upload Dokumen</h3>
+                                <p class="text-white/70 text-sm">Upload KK, Akta Kelahiran, Ijazah, dan dokumen pendukung lainnya</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3 class="font-semibold text-white mb-2">Verifikasi Admin</h3>
+                                <p class="text-white/70 text-sm">Tunggu proses verifikasi dokumen oleh admin sekolah</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h3 class="font-semibold text-white mb-2">Pengumuman Hasil</h3>
+                                <p class="text-white/70 text-sm">Lihat hasil seleksi di menu pengumuman</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="glass-effect rounded-2xl p-8 slide-in-up" style="animation-delay: 0.6s;">
+                        <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3">
+                            <i class="fas fa-bolt text-yellow-400"></i>
+                            Aksi Cepat
+                        </h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <a href="/siswa/formulir/" class="glass-effect p-4 rounded-xl hover:scale-105 transition-transform cursor-pointer">
+                                <i class="fas fa-edit text-2xl text-blue-400 mb-2"></i>
+                                <p class="text-white font-semibold">Isi Formulir</p>
+                            </a>
+                            <a href="/siswa/upload/" class="glass-effect p-4 rounded-xl hover:scale-105 transition-transform cursor-pointer">
+                                <i class="fas fa-upload text-2xl text-green-400 mb-2"></i>
+                                <p class="text-white font-semibold">Upload Dokumen</p>
+                            </a>
+                            <a href="/siswa/status/" class="glass-effect p-4 rounded-xl hover:scale-105 transition-transform cursor-pointer">
+                                <i class="fas fa-chart-line text-2xl text-purple-400 mb-2"></i>
+                                <p class="text-white font-semibold">Cek Status</p>
+                            </a>
+                            <a href="/siswa/pengumuman/" class="glass-effect p-4 rounded-xl hover:scale-105 transition-transform cursor-pointer">
+                                <i class="fas fa-bullhorn text-2xl text-orange-400 mb-2"></i>
+                                <p class="text-white font-semibold">Pengumuman</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar Info -->
+                <div class="space-y-6">
+                    <!-- Progress Card -->
+                    <div class="glass-effect rounded-2xl p-6 slide-in-up" style="animation-delay: 0.7s;">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fas fa-chart-pie text-blue-400"></i>
+                            Progress Pendaftaran
+                        </h3>
+                        <div class="text-center mb-4">
+                            <div class="stat-number text-4xl font-bold mb-2">65%</div>
+                            <p class="text-white/70">Selesai</p>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex justify-between text-sm">
+                                <span class="text-white/70">Data Diri</span>
+                                <span class="text-green-400">✓</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-white/70">Upload Dokumen</span>
+                                <span class="text-yellow-400">●</span>
+                            </div>
+                            <div class="flex justify-between text-sm">
+                                <span class="text-white/70">Verifikasi</span>
+                                <span class="text-gray-400">○</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tips Card -->
+                    <div class="glass-effect rounded-2xl p-6 slide-in-up" style="animation-delay: 0.8s;">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fas fa-lightbulb text-yellow-400"></i>
+                            Tips & Informasi
+                        </h3>
+                        <div class="space-y-4 text-sm text-white/80">
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-info-circle text-blue-400 mt-1"></i>
+                                <p>Pastikan semua dokumen dalam format PDF dan ukuran maksimal 2MB</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-clock text-green-400 mt-1"></i>
+                                <p>Batas pendaftaran: 30 Januari 2024</p>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <i class="fas fa-phone text-purple-400 mt-1"></i>
+                                <p>Hubungi: 0561-123456 untuk bantuan</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Announcements -->
+                    <div class="glass-effect rounded-2xl p-6 slide-in-up" style="animation-delay: 0.9s;">
+                        <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                            <i class="fas fa-megaphone text-orange-400"></i>
+                            Pengumuman Terbaru
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="p-3 bg-white/10 rounded-lg">
+                                <p class="text-white text-sm font-semibold mb-1">Perpanjangan Pendaftaran</p>
+                                <p class="text-white/70 text-xs">Batas pendaftaran diperpanjang hingga 30 Jan 2024</p>
+                                <span class="text-blue-400 text-xs">2 hari lalu</span>
+                            </div>
+                            <div class="p-3 bg-white/10 rounded-lg">
+                                <p class="text-white text-sm font-semibold mb-1">Sosialisasi Online</p>
+                                <p class="text-white/70 text-xs">Ikuti sosialisasi PPDB via Zoom setiap Sabtu</p>
+                                <span class="text-blue-400 text-xs">5 hari lalu</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+            {% endblock %}
         </main>
     </div>
+
+    <script>
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate numbers
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(el => {
+                const finalNum = el.textContent;
+                el.textContent = '0';
+                
+                setTimeout(() => {
+                    let currentNum = 0;
+                    const increment = finalNum.includes('/') ? 1 : Math.ceil(parseInt(finalNum) / 20);
+                    const timer = setInterval(() => {
+                        currentNum += increment;
+                        if (currentNum >= parseInt(finalNum)) {
+                            el.textContent = finalNum;
+                            clearInterval(timer);
+                        } else {
+                            el.textContent = currentNum + (finalNum.includes('/') ? '/5' : '');
+                        }
+                    }, 50);
+                }, 500);
+            });
+
+            // Animate progress bars
+            setTimeout(() => {
+                const progressBars = document.querySelectorAll('.progress-bar');
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
