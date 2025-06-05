@@ -1,0 +1,38 @@
+<header class="bg-white shadow-md fixed w-full z-30">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a class="flex items-center space-x-3" href="{% url 'landing' %}" aria-label="Beranda SMP Negeri 2 Sintang">
+      <img alt="Logo SMP Negeri 2 Sintang" class="w-12 h-12" width="48" height="48"
+           src="https://storage.googleapis.com/a1aa/image/5700b7fa-bc5d-4360-957d-06a8632509ec.jpg"/>
+      <span class="text-2xl font-bold text-green-700">
+        SMP Negeri 2 Sintang
+      </span>
+    </a>
+    <nav class="hidden md:flex space-x-8 font-semibold text-gray-700" aria-label="Navigasi utama">
+      <a class="hover:text-green-600 transition" href="#home">Beranda</a>
+      <a class="hover:text-green-600 transition" href="#about">Tentang</a>
+      <a class="hover:text-green-600 transition" href="#registration">Pendaftaran</a>
+      <a class="hover:text-green-600 transition" href="#faq">FAQ</a>
+      <a class="hover:text-green-600 transition" href="#contact">Kontak</a>
+      <a class="hover:text-green-600 transition" href="{% url 'login' %}">Login</a>
+    </nav>
+    <button aria-label="Menu navigasi mobile" aria-expanded="false" class="md:hidden text-green-700 focus:outline-none" id="menu-btn">
+      <i class="fas fa-bars fa-lg"></i>
+    </button>
+  </div>
+  <nav aria-label="Menu navigasi mobile" class="hidden md:hidden bg-white border-t border-gray-200" id="mobile-menu">
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-green-50 transition" href="#home">Beranda</a>
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-green-50 transition" href="#about">Tentang</a>
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-green-50 transition" href="#registration">Pendaftaran</a>
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-green-50 transition" href="#faq">FAQ</a>
+    <a class="block px-6 py-3 border-b border-gray-200 hover:bg-green-50 transition" href="#contact">Kontak</a>
+    <a class="block px-6 py-3 hover:bg-green-50 transition" href="{% url 'login' %}">Login</a>
+  </nav>
+</header>
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  menuBtn.addEventListener('click', () => {
+    mobileMenu.classList.toggle('hidden');
+    menuBtn.setAttribute('aria-expanded', mobileMenu.classList.contains('hidden') ? 'false' : 'true');
+  });
+</script>

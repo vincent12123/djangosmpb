@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  
+  <!-- SEO Meta Tags -->
+  <title>{% block title %}SPMB SMP Negeri 2 Sintang - Pendaftaran Murid Baru{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Sistem Penerimaan Murid Baru (SPMB) SMP Negeri 2 Sintang. Daftar online, upload dokumen, dan pantau status pendaftaran dengan mudah.{% endblock %}"/>
+  <meta name="keywords" content="{% block meta_keywords %}SPMB, penerimaan siswa baru, pendaftaran SMP Negeri 2 Sintang, sekolah Sintang, pendaftaran sekolah online{% endblock %}"/>
+  <meta name="author" content="SMP Negeri 2 Sintang"/>
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="{{ request.url }}"/>
+  <meta property="og:title" content="{% block og_title %}SPMB SMP Negeri 2 Sintang - Pendaftaran Murid Baru{% endblock %}"/>
+  <meta property="og:description" content="{% block og_description %}Sistem Penerimaan Murid Baru (SPMB) SMP Negeri 2 Sintang. Daftar online, upload dokumen, dan pantau status pendaftaran dengan mudah.{% endblock %}"/>
+  <meta property="og:image" content="https://storage.googleapis.com/a1aa/image/5700b7fa-bc5d-4360-957d-06a8632509ec.jpg"/>
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image"/>
+  <meta property="twitter:url" content="{{ request.url }}"/>
+  <meta property="twitter:title" content="{% block twitter_title %}SPMB SMP Negeri 2 Sintang - Pendaftaran Murid Baru{% endblock %}"/>
+  <meta property="twitter:description" content="{% block twitter_description %}Sistem Penerimaan Murid Baru (SPMB) SMP Negeri 2 Sintang. Daftar online, upload dokumen, dan pantau status pendaftaran dengan mudah.{% endblock %}"/>
+  <meta property="twitter:image" content="https://storage.googleapis.com/a1aa/image/5700b7fa-bc5d-4360-957d-06a8632509ec.jpg"/>
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ request.url_root }}{% block canonical_path %}{% endblock %}"/>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://storage.googleapis.com/a1aa/image/5700b7fa-bc5d-4360-957d-06a8632509ec.jpg"/>
+  
+  <!-- Scripts and Stylesheets -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    /* Custom scrollbar for chat */
+    #chat-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+    #chat-messages::-webkit-scrollbar-thumb {
+      background-color: #4ade80;
+      border-radius: 3px;
+    }
+    #chat-messages {
+      scrollbar-width: thin;
+      scrollbar-color: #4ade80 transparent;
+    }
+    /* Ensure chat window has proper height - updated for wider window */
+    #chat-window {
+      max-height: 480px;
+      height: 480px;
+    }
+    
+    /* Responsive adjustments for wider chat */
+    @media (max-width: 640px) {
+      #chat-window {
+        width: calc(100vw - 2rem) !important;
+        right: 1rem !important;
+        left: 1rem !important;
+        max-width: none !important;
+      }
+      
+      /* Mobile tooltip positioning */
+      .tooltip-mobile {
+        right: 1rem !important;
+        left: auto !important;
+        max-width: calc(100vw - 4rem) !important;
+      }
+    }
+    
+    /* Chat Toggle Button Animations */
+    #chat-toggle {
+    position: fixed !important;
+    bottom: 1.5rem !important;
+    right: 1.5rem !important;
+    z-index: 50 !important;
+    animation: gentleShake 4s ease-in-out infinite;
+  }
+    }
+    
+    /* Gentle shake animation - happens every 4 seconds */
+    @keyframes gentleShake {
+      0%, 90%, 100% { 
+        transform: translateX(0) translateY(0) scale(1); 
+      }
+      92% { 
+        transform: translateX(-1px) translateY(0) scale(1.02); 
+      }
+      94% { 
+        transform: translateX(1px) translateY(-1px) scale(1.02); 
+      }
+      96% { 
+        transform: translateX(-1px) translateY(1px) scale(1.02); 
+      }
+      98% { 
+        transform: translateX(1px) translateY(0) scale(1.02); 
+      }
+    }
+    
+    /* Pulse effect setiap 6 detik */
+    #chat-toggle::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, #10b981, #059669);
+      border-radius: 50%;
+      z-index: -1;
+      animation: pulseRing 6s ease-in-out infinite;
+      opacity: 0;
+    }
+    
+    @keyframes pulseRing {
+      0%, 70% { 
+        transform: scale(1); 
+        opacity: 0; 
+      }
+      10%, 40% { 
+        transform: scale(1.1); 
+        opacity: 0.3; 
+      }
+      50% { 
+        transform: scale(1.2); 
+        opacity: 0; 
+      }
+    }
+    
+    /* Gentle bounce on hover */
+    #chat-toggle:hover {
+      animation: gentleShake 4s ease-in-out infinite, hoverBounce 0.6s ease-in-out;
+    }
+    
+    @keyframes hoverBounce {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-3px) scale(1.05); }
+    }
+    
+    /* Icon wobble inside button */
+    #chat-toggle i {
+      animation: iconWobble 5s ease-in-out infinite;
+    }
+    
+    @keyframes iconWobble {
+      0%, 85%, 100% { transform: rotate(0deg); }
+      87% { transform: rotate(-3deg); }
+      89% { transform: rotate(3deg); }
+      91% { transform: rotate(-2deg); }
+      93% { transform: rotate(2deg); }
+      95% { transform: rotate(-1deg); }
+      97% { transform: rotate(1deg); }
+    }
+    
+    /* Help notification badge */
+    .help-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      animation: badgePulse 2s ease-in-out infinite;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(239, 68, 68, 0.4);
+    }
+    
+    @keyframes badgePulse {
+      0%, 70% { transform: scale(1); opacity: 1; }
+      35% { transform: scale(1.1); opacity: 0.8; }
+    }
+    
+    /* Pause animations when chat is open */
+    .chat-open #chat-toggle {
+      animation: none;
+    }
+    .chat-open #chat-toggle::before {
+      animation: none;
+    }
+    .chat-open #chat-toggle i {
+      animation: none;
+    }
+    
+    /* Typing indicator animation */
+    .typing-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: #6b7280;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+    .typing-dot:nth-child(3) { animation-delay: 0s; }
+    
+    @keyframes typing {
+      0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.3s ease-out;
+    }
+    
+    /* Gemini AI badge */
+    .ai-badge {
+      font-size: 10px;
+      background: linear-gradient(135deg, #4285f4, #34a853);
+      color: white;
+      padding: 2px 6px;
+      border-radius: 8px;
+      margin-left: 8px;
+    }
+    
+    /* Markdown styling untuk chat - updated for wider messages */
+    .chat-markdown h1, .chat-markdown h2, .chat-markdown h3 {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .chat-markdown h1 { font-size: 1.2rem; }
+    .chat-markdown h2 { font-size: 1.1rem; }
+    .chat-markdown h3 { font-size: 1rem; }
+    .chat-markdown strong { font-weight: bold; }
+    .chat-markdown em { font-style: italic; }
+    .chat-markdown ul, .chat-markdown ol {
+      margin-left: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .chat-markdown li { margin-bottom: 0.25rem; }
+    .chat-markdown p { margin-bottom: 0.5rem; }
+    .chat-markdown code {
+      background-color: #f3f4f6;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+      font-family: monospace;
+    }
+    
+    /* Better message layout for wider chat */
+    .chat-message {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+    }
+    
+    {% block custom_css %}{% endblock %}
+  </style>
+  {% block extra_head %}
+  <!-- Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  {% endblock %}
+</head>
+<body class="bg-gray-50 text-gray-800 relative">
+  <!-- Structured Data for Organization -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "SMP Negeri 2 Sintang",
+    "url": "{{ request.url_root }}",
+    "logo": "https://storage.googleapis.com/a1aa/image/5700b7fa-bc5d-4360-957d-06a8632509ec.jpg",
+    "description": "Sekolah Menengah Pertama (SMP) Negeri 2 Sintang, Kalimantan Barat",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Jl. Letjend MT Haryono, RT 14/RW 4",
+      "addressLocality": "Sintang",
+      "addressRegion": "Kalimantan Barat",
+      "postalCode": "78614",
+      "addressCountry": "ID"
+    },
+    "telephone": "+62 561 1234567",
+    "email": "spmb@smpn2sintang.sch.id"
+  }
+  </script>
+
+  {% include 'landing/navbar.html' %}
+  
+  <main class="pt-24">
+    {% block content %}{% endblock %}
+  </main>
+  
+  {% include 'landing/footer.html' %}
+  
+  <!-- Chat Toggle Button -->
+  <button aria-label="Buka chat bantuan AI" class="fixed bottom-6 right-6 bg-gradient-to-r from-green-600 to-green-700 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:from-green-700 hover:to-green-800 transition-all duration-300 z-50" id="chat-toggle" type="button">
+    <i class="fas fa-robot fa-lg"></i>
+    <span class="help-badge">!</span>
+  </button>
+  
+  <!-- Chatbot Window -->
+  <div aria-atomic="true" aria-label="Chat bantuan AI SPMB SMP Negeri 2 Sintang" aria-live="polite" class="fixed bottom-20 right-6 w-96 max-w-[calc(100vw-3rem)] bg-white rounded-lg shadow-2xl border border-gray-200 z-50 hidden" id="chat-window" role="dialog">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-3 rounded-t-lg flex justify-between items-center flex-shrink-0">
+      <div class="flex items-center">
+        <h3 class="font-semibold text-lg">Chat Bantuan AI</h3>
+        <span class="ai-badge">Powered by TechInspire</span>
+      </div>
+      <button aria-label="Tutup chat" class="text-white hover:text-green-200 focus:outline-none transition-colors" id="chat-close" type="button">
+        <i class="fas fa-times"></i>
+      </button>
+    </header>
+    
+    <!-- Connection Status -->
+    <div id="connection-status" class="px-4 py-2 text-xs bg-gray-100 border-b border-gray-200 hidden">
+      <span class="text-gray-600">Status: </span>
+      <span id="status-text" class="font-medium text-green-600">Terhubung</span>
+    </div>
+    
+    <!-- Messages Container -->
+    <div class="flex-1 p-4 overflow-y-auto flex flex-col space-y-3 bg-gray-50" id="chat-messages" style="height: 320px;">
+      <div class="text-gray-700 bg-green-100 rounded-lg p-3 max-w-[85%] self-start border border-green-200">
+        <div class="flex items-center gap-2 mb-1">
+          <i class="fas fa-robot text-green-600 text-sm"></i>
+          <span class="text-xs font-medium text-green-700">AI Assistant</span>
+        </div>
+        Halo! Saya asisten AI untuk PPDB SMP Negeri 2 Sintang. Ada yang bisa saya bantu terkait pendaftaran murid baru? 🎓
+      </div>
+    </div>
+    
+    <!-- Input Form -->
+    <div class="border-t border-gray-200 bg-white rounded-b-lg flex-shrink-0">
+      <form aria-label="Formulir chat bantuan AI" class="p-4 flex space-x-3" id="chat-form">
+        <input aria-label="Ketik pesan Anda" class="flex-1 border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 text-sm" id="chat-input" placeholder="Tanya tentang PPDB..." type="text" autocomplete="off" maxlength="500" />
+        <button aria-label="Kirim pesan chat" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-4 py-2 rounded-md hover:from-green-700 hover:to-green-800 transition-all duration-200 flex-shrink-0 disabled:opacity-50 disabled:cursor-not-allowed" type="submit" id="chat-submit">
+          <i class="fas fa-paper-plane"></i>
+        </button>
+      </form>
+      
+      <!-- Character counter -->
+      <div class="px-4 pb-2">
+        <div class="text-xs text-gray-400 text-right">
+          <span id="char-count">0</span>/500
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Chat Bot dengan Gemini AI Integration
+    class GeminiChatBot {
+      constructor() {
+        this.chatToggle = document.getElementById('chat-toggle');
+        this.chatWindow = document.getElementById('chat-window');
+        this.chatClose = document.getElementById('chat-close');
+        this.chatForm = document.getElementById('chat-form');
+        this.chatInput = document.getElementById('chat-input');
+        this.chatMessages = document.getElementById('chat-messages');
+        this.chatSubmit = document.getElementById('chat-submit');
+        this.charCount = document.getElementById('char-count');
+        this.connectionStatus = document.getElementById('connection-status');
+        this.statusText = document.getElementById('status-text');
+        this.helpBadge = document.querySelector('.help-badge');
+        
+        this.isLoading = false;
+        this.sessionId = null;
+        this.hasInteracted = false;
+        
+        this.initializeEventListeners();
+        this.checkConnection();
+        this.initializeHelpPrompts();
+      }
+      
+      initializeEventListeners() {
+        this.chatToggle.addEventListener('click', () => this.openChat());
+        this.chatClose.addEventListener('click', () => this.closeChat());
+        this.chatForm.addEventListener('submit', (e) => this.handleSubmit(e));
+        this.chatInput.addEventListener('input', () => this.updateCharCount());
+        this.chatInput.addEventListener('keypress', (e) => {
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            this.handleSubmit(e);
+          }
+        });
+      }
+      
+      initializeHelpPrompts() {
+        // Hilangkan badge setelah user interact
+        setTimeout(() => {
+          if (!this.hasInteracted) {
+            this.showSubtlePrompt();
+          }
+        }, 8000); // Show prompt after 8 seconds
+        
+        // Auto-hide badge after 20 seconds if no interaction
+        setTimeout(() => {
+          if (!this.hasInteracted && this.helpBadge) {
+            this.helpBadge.style.opacity = '0';
+            setTimeout(() => {
+              if (this.helpBadge) this.helpBadge.style.display = 'none';
+            }, 300);
+          }
+        }, 20000);
+      }
+      
+      showSubtlePrompt() {
+        // Create a subtle tooltip that appears briefly
+        const tooltip = document.createElement('div');
+        tooltip.innerHTML = `
+          <div class="bg-gray-800 text-white text-xs px-3 py-2 rounded-lg shadow-lg max-w-48">
+            💬 Butuh bantuan PPDB? Tanya saja di sini!
+            <div class="absolute -bottom-1 right-6 w-2 h-2 bg-gray-800 transform rotate-45"></div>
+          </div>
+        `;
+        
+        // Responsive positioning untuk tooltip
+        const isMobile = window.innerWidth <= 640;
+        if (isMobile) {
+          tooltip.className = 'fixed bottom-20 right-6 z-50 animate-fade-in tooltip-mobile';
+        } else {
+          tooltip.className = 'fixed bottom-20 right-6 z-50 animate-fade-in';
+        }
+        
+        document.body.appendChild(tooltip);
+        
+        // Auto remove after 4 seconds
+        setTimeout(() => {
+          if (tooltip && tooltip.parentNode) {
+            tooltip.style.opacity = '0';
+            setTimeout(() => {
+              if (tooltip.parentNode) {
+                tooltip.parentNode.removeChild(tooltip);
+              }
+            }, 300);
+          }
+        }, 4000);
+      }
+      
+      openChat() {
+        this.hasInteracted = true;
+        this.chatWindow.classList.remove('hidden');
+        this.chatToggle.classList.add('hidden');
+        document.body.classList.add('chat-open');
+        
+        // Hide help badge when chat opens
+        if (this.helpBadge) {
+          this.helpBadge.style.display = 'none';
+        }
+        
+        this.chatInput.focus();
+        this.scrollToBottom();
+      }
+      
+      closeChat() {
+        this.chatWindow.classList.add('hidden');
+        this.chatToggle.classList.remove('hidden');
+        document.body.classList.remove('chat-open');
+        
+        // Show help badge again when chat closes (but more subtle)
+        if (this.helpBadge) {
+          this.helpBadge.style.display = 'block';
+          this.helpBadge.style.opacity = '0.6';
+        }
+      }
+      
+      updateCharCount() {
+        const length = this.chatInput.value.length;
+        this.charCount.textContent = length;
+        
+        if (length > 450) {
+          this.charCount.classList.add('text-red-500');
+        } else {
+          this.charCount.classList.remove('text-red-500');
+        }
+      }
+      
+      async handleSubmit(e) {
+        e.preventDefault();
+        
+        if (this.isLoading) return;
+        
+        const userMessage = this.chatInput.value.trim();
+        if (!userMessage) return;
+        
+        if (userMessage.length > 500) {
+          this.showError('Pesan terlalu panjang (maksimal 500 karakter)');
+          return;
+        }
+        
+        this.appendMessage(userMessage, 'user');
+        this.chatInput.value = '';
+        this.updateCharCount();
+        this.setLoading(true);
+        
+        // Show typing indicator
+        this.showTypingIndicator();
+        
+        try {
+          const response = await this.sendToGemini(userMessage);
+          this.hideTypingIndicator();
+          
+          if (response.success) {
+            this.appendMessage(response.response, 'bot', response.source);
+            this.sessionId = response.session_id;
+          } else {
+            this.appendMessage(
+              response.fallback_response || response.error || 'Maaf, terjadi kesalahan. Silakan coba lagi.',
+              'bot',
+              'error'
+            );
+          }
+        } catch (error) {
+          this.hideTypingIndicator();
+          console.error('Chat error:', error);
+          this.appendMessage(
+            'Maaf, saya sedang mengalami gangguan. Silakan hubungi sekolah di +62 561 1234567 untuk bantuan langsung.',
+            'bot',
+            'error'
+          );
+        }
+        
+        this.setLoading(false);
+      }
+      
+      async sendToGemini(message) {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: message,
+            session_id: this.sessionId
+          })
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        return await response.json();
+      }
+      
+      appendMessage(message, sender, source = null) {
+        const div = document.createElement('div');
+        div.classList.add('rounded-lg', 'p-3', 'max-w-[80%]', 'break-words', 'animate-fade-in');
+        
+        if (sender === 'user') {
+          div.classList.add('bg-green-700', 'text-white', 'self-end', 'ml-auto');
+          div.textContent = message; // User message tetap plain text
+        } else {
+          div.classList.add('text-gray-700', 'bg-green-100', 'border', 'border-green-200', 'self-start', 'chat-markdown');
+          
+          // Parse Markdown untuk bot response
+          if (typeof marked !== 'undefined') {
+            div.innerHTML = marked.parse(message);
+          } else {
+            div.textContent = message; // Fallback jika marked.js tidak load
+          }
+          
+          // Tambahkan badge source jika dari Gemini
+          if (source === 'gemini') {
+            const badge = document.createElement('div');
+            badge.className = 'flex items-center gap-2 mb-1';
+            badge.innerHTML = '<i class="fas fa-robot text-green-600"></i><span class="ai-badge">Powered by SMPN2 AI</span>';
+            div.insertBefore(badge, div.firstChild);
+          }
+        }
+        
+        this.chatMessages.appendChild(div);
+        this.scrollToBottom();
+      }
+      
+      showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.id = 'typing-indicator';
+        typingDiv.classList.add('bg-white', 'text-gray-500', 'rounded-lg', 'p-3', 'max-w-[80%]', 'self-start', 'border', 'border-gray-200', 'animate-fade-in');
+        
+        const header = document.createElement('div');
+        header.classList.add('flex', 'items-center', 'gap-2', 'mb-1');
+        
+        const icon = document.createElement('i');
+        icon.classList.add('fas', 'fa-robot', 'text-blue-500', 'text-sm');
+        
+        const label = document.createElement('span');
+        label.classList.add('text-xs', 'font-medium', 'text-blue-600');
+        label.textContent = 'SMPN2 AI';
+        
+        header.appendChild(icon);
+        header.appendChild(label);
+        
+        const typingContent = document.createElement('div');
+        typingContent.classList.add('flex', 'items-center', 'gap-1');
+        typingContent.innerHTML = '<span class="text-sm">Sedang mengetik</span><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+        
+        typingDiv.appendChild(header);
+        typingDiv.appendChild(typingContent);
+        
+        this.chatMessages.appendChild(typingDiv);
+        this.scrollToBottom();
+      }
+      
+      hideTypingIndicator() {
+        const typingIndicator = document.getElementById('typing-indicator');
+        if (typingIndicator) {
+          typingIndicator.remove();
+        }
+      }
+      
+      setLoading(loading) {
+        this.isLoading = loading;
+        this.chatSubmit.disabled = loading;
+        this.chatInput.disabled = loading;
+        
+        if (loading) {
+          this.chatSubmit.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+          this.chatSubmit.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+      }
+      
+      scrollToBottom() {
+        setTimeout(() => {
+          this.chatMessages.scrollTop = this.chatMessages.scrollHeight;
+        }, 100);
+      }
+      
+      showError(message) {
+        this.appendMessage(message, 'bot', 'error');
+      }
+      
+      async checkConnection() {
+        try {
+          const response = await fetch('/api/chat/health');
+          const health = await response.json();
+          
+          if (health.status === 'healthy') {
+            this.statusText.textContent = 'Terhubung ke Gemini AI';
+            this.statusText.classList.remove('text-red-600');
+            this.statusText.classList.add('text-green-600');
+          } else {
+            this.statusText.textContent = 'Mode Offline';
+            this.statusText.classList.remove('text-green-600');
+            this.statusText.classList.add('text-orange-600');
+          }
+          
+          // Show status for 3 seconds then hide
+          this.connectionStatus.classList.remove('hidden');
+          setTimeout(() => {
+            this.connectionStatus.classList.add('hidden');
+          }, 3000);
+          
+        } catch (error) {
+          console.log('Connection check failed:', error);
+          this.statusText.textContent = 'Mode Offline';
+          this.statusText.classList.remove('text-green-600');
+          this.statusText.classList.add('text-red-600');
+          
+          this.connectionStatus.classList.remove('hidden');
+          setTimeout(() => {
+            this.connectionStatus.classList.add('hidden');
+          }, 3000);
+        }
+      }
+    }
+    
+    // Initialize chatbot when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      new GeminiChatBot();
+    });
+  </script>
+  
+  {% block scripts %}{% endblock %}
+</body>
+</html>

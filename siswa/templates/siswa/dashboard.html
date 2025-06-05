@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Siswa - PPDB SMP Negeri 2</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Topbar -->
+    <header class="bg-white shadow flex items-center justify-between px-6 py-4 sticky top-0 z-10">
+        <div class="flex items-center gap-3">
+            <span class="text-2xl font-bold text-green-700"><i class="fas fa-user-graduate mr-2"></i>Dashboard Siswa</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-gray-700 font-semibold"><i class="fas fa-user-circle mr-1"></i>{{ request.user.username }}</span>
+            <a href="/accounts/logout/" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded transition flex items-center"><i class="fas fa-sign-out-alt mr-1"></i>Logout</a>
+        </div>
+    </header>
+    <div class="flex flex-1 min-h-0">
+        <!-- Sidebar -->
+        <aside class="w-64 bg-gradient-to-b from-blue-800 to-blue-700 text-white flex flex-col py-8 px-4 min-h-screen">
+            <div class="mb-8 flex flex-col items-center">
+                <i class="fas fa-user-circle text-5xl mb-2"></i>
+                <span class="font-bold text-lg">{{ request.user.username }}</span>
+                <span class="text-xs text-blue-200">Calon Siswa</span>
+            </div>
+            <nav class="flex flex-col gap-2">
+                <a href="/siswa/status/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-info-circle"></i>Status</a>
+                <a href="/siswa/formulir/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-edit"></i>Isi Formulir</a>
+                <a href="/siswa/upload/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-upload"></i>Upload Dokumen</a>
+                <a href="/siswa/pengumuman/" class="flex items-center gap-2 px-3 py-2 rounded hover:bg-blue-600 transition"><i class="fas fa-bullhorn"></i>Pengumuman</a>
+            </nav>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 p-8 overflow-y-auto">
+            <h1 class="text-3xl font-bold mb-6 text-green-700 flex items-center gap-2"><i class="fas fa-home"></i> Selamat Datang, {{ request.user.username }}!</h1>
+            <!-- Card Statistik -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4">
+                    <div class="bg-blue-100 text-blue-700 rounded-full p-3"><i class="fas fa-file-alt fa-2x"></i></div>
+                    <div>
+                        <div class="text-2xl font-bold">-</div>
+                        <div class="text-sm text-gray-500">Dokumen Diupload</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4">
+                    <div class="bg-green-100 text-green-700 rounded-full p-3"><i class="fas fa-check-circle fa-2x"></i></div>
+                    <div>
+                        <div class="text-2xl font-bold">-</div>
+                        <div class="text-sm text-gray-500">Status Pendaftaran</div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl shadow p-6 flex items-center gap-4">
+                    <div class="bg-yellow-100 text-yellow-700 rounded-full p-3"><i class="fas fa-bullhorn fa-2x"></i></div>
+                    <div>
+                        <div class="text-2xl font-bold">-</div>
+                        <div class="text-sm text-gray-500">Pengumuman</div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white rounded-xl shadow p-6">
+                <h2 class="text-xl font-semibold mb-2 text-blue-700">Panduan Singkat</h2>
+                <ul class="list-disc pl-6 text-gray-700 space-y-1">
+                    <li>Lengkapi data diri dan formulir pendaftaran sesuai Dapodik.</li>
+                    <li>Upload dokumen yang diperlukan (KK, Akta, dsb).</li>
+                    <li>Cek status pendaftaran secara berkala.</li>
+                    <li>Lihat pengumuman hasil seleksi di menu pengumuman.</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
