@@ -2,12 +2,6 @@
 
 This is a Django project for SMP Negeri 2 student admission (PPDB) with SEO landing page, registration, login, and student dashboard. Registration form must match Dapodik SMP Indonesia requirements.
 
-# Gemini ai
-
-| Language | Library lama         | Library baru (Direkomendasikan) |
-|----------|----------------------|---------------------------------|
-| Python   | google-generativeai   | google-genai                    |
-
 
 # Style Guidelines
 - Always use Tailwind CSS for all styling - no custom CSS files
@@ -54,3 +48,9 @@ This is a Django project for SMP Negeri 2 student admission (PPDB) with SEO land
 - Use Django's caching framework
 - Implement lazy loading for images
 - Minimize database queries using Django ORM best practices
+
+# App Organization Guidelines
+- Selalu buat app Django baru untuk fitur besar atau role user yang berbeda (misal: dashboard operator/admin, fitur verifikasi, manajemen data sekolah)
+- Jangan gabungkan fitur operator/admin dengan app landing, accounts, atau siswa
+- Setiap app harus punya folder templates sendiri dan url namespace sendiri
+- Gunakan struktur modular agar mudah dikembangkan dan dipelihara

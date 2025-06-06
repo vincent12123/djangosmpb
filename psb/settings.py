@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'landing',
     'accounts',
     'siswa',
+    'adminpanel',  # Tambahkan baris ini
 ]
 
 MIDDLEWARE = [

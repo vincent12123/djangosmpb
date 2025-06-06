@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('landing.urls')),
     path('accounts/', include('accounts.urls')),
     path('siswa/', include('siswa.urls')),
+    path('adminpanel/', include('adminpanel.urls', namespace='adminpanel')),
 ]

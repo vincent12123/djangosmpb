@@ -20,7 +20,11 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('dashboard')
+            # Redirect sesuai role
+            if hasattr(user, 'role') and user.role == 'admin':
+                return redirect('adminpanel:dashboard')
+            else:
+                return redirect('dashboard')
     else:
         form = AuthenticationForm()
     return render(request, 'accounts/login.html', {'form': form})
