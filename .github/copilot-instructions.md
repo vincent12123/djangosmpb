@@ -2,6 +2,13 @@
 
 This is a Django project for SMP Negeri 2 student admission (PPDB) with SEO landing page, registration, login, and student dashboard. Registration form must match Dapodik SMP Indonesia requirements.
 
+# Gemini ai
+
+| Language | Library lama         | Library baru (Direkomendasikan) |
+|----------|----------------------|---------------------------------|
+| Python   | google-generativeai   | google-genai                    |
+
+
 # Style Guidelines
 - Always use Tailwind CSS for all styling - no custom CSS files
 - Use utility-first approach with Tailwind classes

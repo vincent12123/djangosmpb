@@ -1,0 +1,39 @@
+# Lingkungan Virtual (Virtual Environments)
+.venv/
+venv/
+env/
+
+# Cache Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# File Database Lokal
+*.sqlite3
+db.sqlite3
+db.sqlite3-journal
+
+# File Log
+*.log
+logs/
+
+# File Media & Statis yang Diunggah Pengguna
+/media/
+/staticfiles/
+
+# File Lingkungan (Environment Variables)
+# Jangan pernah memasukkan file .env ke dalam repositori publik!
+.env
+.env.*
+*.local
+
+# Laporan Pengujian dan Cakupan (Testing & Coverage)
+htmlcov/
+.coverage
+.coverage.*
+.pytest_cache/
+
+# Konfigurasi Editor/IDE
+.vscode/
+.idea/
