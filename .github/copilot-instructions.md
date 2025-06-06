@@ -17,12 +17,13 @@ This is a Django project for SMP Negeri 2 student admission (PPDB) with SEO land
 - Implement proper CSRF protection
 - Use Django's built-in authentication system
 
-# Tailwind CSS Conventions
+# Tailwind CSS Conventions 
 - Use semantic color classes (bg-blue-500, text-gray-700)
 - Implement consistent spacing using Tailwind's spacing scale (p-4, m-2, etc.)
 - Use Tailwind's grid system for layouts
 - Apply hover and focus states for interactive elements
 - Use Tailwind's typography plugin for content areas
+- Tailwind CSS hanya di pakai untuk landing page 
 
 # Component Structure
 - Create reusable Django template components

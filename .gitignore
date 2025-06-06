@@ -37,3 +37,6 @@ htmlcov/
 # Konfigurasi Editor/IDE
 .vscode/
 .idea/
+
+# Documentasi
+documentation/
