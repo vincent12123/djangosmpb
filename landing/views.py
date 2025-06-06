@@ -1,35 +1,21 @@
-from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+import os
 import json
-from django.shortcuts import render
 import time
 import uuid
-from django.views.decorators.http import require_POST
-import os
-from google import genai
 
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.shortcuts import render
 from django.conf import settings
 
-def get_gemini_model():
-    api_key = getattr(settings, 'GEMINI_API_KEY', None) or os.environ.get('GEMINI_API_KEY')
-    if not api_key:
-        return None
-    genai.configure(api_key=api_key)
-    generation_config = {
-        "temperature": 0.7,
-        "top_p": 0.8,
-        "top_k": 40,
-        "max_output_tokens": 1024,
-        "response_mime_type": "text/plain",
-    }
-    safety_settings = [
-        {"category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-        {"category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-        {"category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-        {"category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_MEDIUM_AND_ABOVE"},
-    ]
-    model_name = getattr(settings, 'GEMINI_MODEL', 'gemini-2.0-flash-exp')
-    system_prompt = """
+from google import genai  # Correct import for new SDK
+
+# --- Gemini Config ---
+GEMINI_MODEL = getattr(settings, 'GEMINI_MODEL', 'gemini-2.0-flash-exp')
+GEMINI_API_KEY = getattr(settings, 'GEMINI_API_KEY', None) or os.environ.get('GEMINI_API_KEY')
+
+SYSTEM_PROMPT = """
 Anda adalah asisten virtual untuk Sistem Penerimaan Murid Baru (SPMB) SMP Negeri 2 Sintang.
 
 INFORMASI SEKOLAH:
@@ -82,12 +68,11 @@ ATURAN RESPONS:
 - Gunakan emoji yang sesuai 🎓📚✅
 - Selalu tawarkan bantuan lebih lanjut
 """
-    return genai.GenerativeModel(
-        model_name=model_name,
-        generation_config=generation_config,
-        safety_settings=safety_settings,
-        system_instruction=system_prompt
-    )
+
+def get_gemini_client():
+    if not GEMINI_API_KEY:
+        return None
+    return genai.Client(api_key=GEMINI_API_KEY)
 
 @csrf_exempt
 @require_POST
@@ -96,36 +81,51 @@ def api_chat(request):
         data = json.loads(request.body)
         user_message = data.get('message', '').strip()
         session_id = data.get('session_id')
+        
         if not user_message:
-            return JsonResponse({
-                'success': False,
-                'error': 'Pesan tidak boleh kosong'
-            }, status=400)
+            return JsonResponse({'success': False, 'error': 'Pesan tidak boleh kosong'}, status=400)
         if len(user_message) > 500:
-            return JsonResponse({
-                'success': False,
-                'error': 'Pesan terlalu panjang (maksimal 500 karakter)'
-            }, status=400)
+            return JsonResponse({'success': False, 'error': 'Pesan terlalu panjang (maksimal 500 karakter)'}, status=400)
         if not session_id:
             session_id = str(uuid.uuid4())
+        
         start_time = time.time()
-        # --- INTEGRASI GEMINI ASLI ---
-        model = get_gemini_model()
-        if not model:
+        client = get_gemini_client()
+        if not client:
             return JsonResponse({
                 'success': False,
-                'error': 'Gemini API key tidak ditemukan atau model gagal diinisialisasi',
+                'error': 'Gemini API key tidak ditemukan atau client gagal diinisialisasi',
                 'fallback_response': 'Maaf, layanan AI tidak tersedia. Hubungi admin sekolah.'
             }, status=503)
+        
+        # Compose the full prompt (system + user message)
+        full_prompt = f"{SYSTEM_PROMPT}\n\nUser: {user_message}\nAssistant:"
+        
+        gemini_response = 'Maaf, terjadi kesalahan saat menghubungi AI. Silakan coba lagi.'
         try:
-            response = model.generate_content(user_message)
+            # Use the simplified API call
+            response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=full_prompt
+            )
+            
+            # Extract the text content from the response
             if hasattr(response, 'text'):
                 gemini_response = response.text.strip()
+            elif hasattr(response, 'candidates') and response.candidates:
+                # Try to extract from candidates
+                candidate = response.candidates[0]
+                if hasattr(candidate, 'content') and hasattr(candidate.content, 'parts'):
+                    gemini_response = candidate.content.parts[0].text.strip()
+                else:
+                    gemini_response = str(candidate)
             else:
                 gemini_response = str(response)
+                
         except Exception as e:
-            gemini_response = 'Maaf, terjadi kesalahan saat menghubungi AI. Silakan coba lagi.'
-        # --- END INTEGRASI ---
+            print(f"Gemini API error: {str(e)}")
+            gemini_response = f'Maaf, terjadi kesalahan saat menghubungi AI: {str(e)}'
+        
         response_time = time.time() - start_time
         return JsonResponse({
             'success': True,
@@ -136,12 +136,41 @@ def api_chat(request):
             'format': 'markdown'
         })
     except Exception as e:
+        print(f"Chat API error: {str(e)}")
         return JsonResponse({
             'success': False,
-            'error': 'Internal server error',
+            'error': f'Internal server error: {str(e)}',
             'fallback_response': 'Maaf, terjadi kesalahan sistem. Silakan coba lagi atau hubungi admin sekolah di +62 561 1234567.'
         }, status=500)
 
-# Create your views here.
+# Optional: Health check endpoint
+@csrf_exempt
+def api_chat_health(request):
+    try:
+        client = get_gemini_client()
+        if client:
+            # Test with a simple prompt
+            test_response = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents="Hello"
+            )
+            return JsonResponse({
+                'status': 'healthy', 
+                'message': 'Gemini AI service is available', 
+                'timestamp': time.time()
+            })
+        else:
+            return JsonResponse({
+                'status': 'degraded', 
+                'message': 'Gemini AI service is not available', 
+                'timestamp': time.time()
+            })
+    except Exception as e:
+        return JsonResponse({
+            'status': 'unhealthy', 
+            'message': f'Error: {str(e)}', 
+            'timestamp': time.time()
+        })
+
 def landing(request):
     return render(request, 'landing/index.html')
